@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profiles</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center mb-4">Registered Users</h1>
+      <div class="row">
+        <% users.forEach(user => { %>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title"><%= user.name %></h5>
+              <p class="card-text"><strong>Email:</strong> <%= user.email %></p>
+              <p class="card-text"><strong>Phone:</strong> <%= user.phone %></p>
+              <p class="card-text">
+                <strong>Profession:</strong> <%= user.profession %>
+              </p>
+              <hr />
+
+              <form action="/update/<%= user._id %>" method="POST" class="mb-2">
+                <div class="form-group">
+                  <label for="name-<%= user._id %>">Name</label>
+                  <input
+                    type="text"
+                    id="name-<%= user._id %>"
+                    name="name"
+                    value="<%= user.name %>"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="phone-<%= user._id %>">Phone</label>
+                  <input
+                    type="text"
+                    id="phone-<%= user._id %>"
+                    name="phone"
+                    value="<%= user.phone %>"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                  Update
+                </button>
+              </form>
+
+              <form action="/delete/<%= user._id %>" method="POST">
+                <button type="submit" class="btn btn-danger btn-block">
+                  Delete
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
